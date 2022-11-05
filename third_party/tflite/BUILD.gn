@@ -37,7 +37,10 @@ config("tflite_flags") {
     "-Wno-unreachable-code-break",
     "-Wno-unreachable-code-return",
 
-    "-Wno-unused-but-set-variable",
+    # FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+    #        But -Wno-unused-but-set-variable is supported from clang version 13
+    # Ref: https://reviews.freebsd.org/D31927
+    # "-Wno-unused-but-set-variable",
 
     # This flag is needed to enable the strip error strings flag since a handful
     # of variables are only used in error logs, which are no-op'd in a macro

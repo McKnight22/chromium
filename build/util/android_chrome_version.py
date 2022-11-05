@@ -104,12 +104,15 @@ _APKS = {
 }
 
 # Splits input build config architecture to manufacturer and bitness.
+# FIXME: Android supports RISCV64 only.
+#        A workaround of handling RISCV64 as 32bit arch is the simplest way.
 _ARCH_TO_MFG_AND_BITNESS = {
     'arm': ('arm', '32'),
     'arm64': ('arm', '64'),
     'x86': ('intel', '32'),
     'x64': ('intel', '64'),
     'mipsel': ('mipsel', '32'),
+    'riscv64': ('riscv', '32'),
 }
 
 # Expose the available choices to other scripts.
@@ -170,6 +173,9 @@ _ABIS_TO_BIT_MASK = {
     },
     'mipsel': {
         '32': 2,
+    },
+    'riscv': {
+         '32': 9
     }
 }
 

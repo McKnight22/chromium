@@ -45,7 +45,11 @@ enum class Base64UrlDecodePolicy {
 //
 // The |policy| defines whether padding will be required, ignored or disallowed
 // altogether. |input| and |*output| may reference the same storage.
-[[nodiscard]] BASE_EXPORT bool Base64UrlDecode(const StringPiece& input,
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT bool Base64UrlDecode(const StringPiece& input,
+__attribute__((warn_unused_result)) BASE_EXPORT bool Base64UrlDecode(const StringPiece& input,
                                                Base64UrlDecodePolicy policy,
                                                std::string* output);
 

@@ -31,15 +31,22 @@ namespace base {
 
 // Converts between wide and UTF-8 representations of a string. On error, the
 // result is system-dependent.
-[[nodiscard]] BASE_EXPORT std::string SysWideToUTF8(const std::wstring& wide);
-[[nodiscard]] BASE_EXPORT std::wstring SysUTF8ToWide(StringPiece utf8);
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::string SysWideToUTF8(const std::wstring& wide);
+// [[nodiscard]] BASE_EXPORT std::wstring SysUTF8ToWide(StringPiece utf8);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string SysWideToUTF8(const std::wstring& wide);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring SysUTF8ToWide(StringPiece utf8);
 
 // Converts between wide and the system multi-byte representations of a string.
 // DANGER: This will lose information and can change (on Windows, this can
 // change between reboots).
-[[nodiscard]] BASE_EXPORT std::string SysWideToNativeMB(
+// [[nodiscard]] BASE_EXPORT std::string SysWideToNativeMB(
+__attribute__((warn_unused_result)) BASE_EXPORT std::string SysWideToNativeMB(
     const std::wstring& wide);
-[[nodiscard]] BASE_EXPORT std::wstring SysNativeMBToWide(StringPiece native_mb);
+// [[nodiscard]] BASE_EXPORT std::wstring SysNativeMBToWide(StringPiece native_mb);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring SysNativeMBToWide(StringPiece native_mb);
 
 // Windows-specific ------------------------------------------------------------
 
@@ -48,9 +55,11 @@ namespace base {
 // Converts between 8-bit and wide strings, using the given code page. The
 // code page identifier is one accepted by the Windows function
 // MultiByteToWideChar().
-[[nodiscard]] BASE_EXPORT std::wstring SysMultiByteToWide(StringPiece mb,
+// [[nodiscard]] BASE_EXPORT std::wstring SysMultiByteToWide(StringPiece mb,
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring SysMultiByteToWide(StringPiece mb,
                                                           uint32_t code_page);
-[[nodiscard]] BASE_EXPORT std::string SysWideToMultiByte(
+// [[nodiscard]] BASE_EXPORT std::string SysWideToMultiByte(
+__attribute__((warn_unused_result)) BASE_EXPORT std::string SysWideToMultiByte(
     const std::wstring& wide,
     uint32_t code_page);
 
@@ -63,26 +72,34 @@ namespace base {
 // Converts between strings and CFStringRefs/NSStrings.
 
 // Converts a string to a CFStringRef. Returns null on failure.
-[[nodiscard]] BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF8ToCFStringRef(
+// [[nodiscard]] BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF8ToCFStringRef(
+__attribute__((warn_unused_result)) BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF8ToCFStringRef(
     StringPiece utf8);
-[[nodiscard]] BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF16ToCFStringRef(
+// [[nodiscard]] BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF16ToCFStringRef(
+__attribute__((warn_unused_result)) BASE_EXPORT ScopedCFTypeRef<CFStringRef> SysUTF16ToCFStringRef(
     StringPiece16 utf16);
 
 // Converts a CFStringRef to a string. Returns an empty string on failure. It is
 // not valid to call these with a null `ref`.
-[[nodiscard]] BASE_EXPORT std::string SysCFStringRefToUTF8(CFStringRef ref);
-[[nodiscard]] BASE_EXPORT std::u16string SysCFStringRefToUTF16(CFStringRef ref);
+// [[nodiscard]] BASE_EXPORT std::string SysCFStringRefToUTF8(CFStringRef ref);
+// [[nodiscard]] BASE_EXPORT std::u16string SysCFStringRefToUTF16(CFStringRef ref);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string SysCFStringRefToUTF8(CFStringRef ref);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string SysCFStringRefToUTF16(CFStringRef ref);
 
 #ifdef __OBJC__
 
 // Converts a string to an autoreleased NSString. Returns nil on failure.
-[[nodiscard]] BASE_EXPORT NSString* SysUTF8ToNSString(StringPiece utf8);
-[[nodiscard]] BASE_EXPORT NSString* SysUTF16ToNSString(StringPiece16 utf16);
+// [[nodiscard]] BASE_EXPORT NSString* SysUTF8ToNSString(StringPiece utf8);
+// [[nodiscard]] BASE_EXPORT NSString* SysUTF16ToNSString(StringPiece16 utf16);
+__attribute__((warn_unused_result)) BASE_EXPORT NSString* SysUTF8ToNSString(StringPiece utf8);
+__attribute__((warn_unused_result)) BASE_EXPORT NSString* SysUTF16ToNSString(StringPiece16 utf16);
 
 // Converts an NSString to a string. Returns an empty string on failure or if
 // `ref` is nil.
-[[nodiscard]] BASE_EXPORT std::string SysNSStringToUTF8(NSString* ref);
-[[nodiscard]] BASE_EXPORT std::u16string SysNSStringToUTF16(NSString* ref);
+// [[nodiscard]] BASE_EXPORT std::string SysNSStringToUTF8(NSString* ref);
+// [[nodiscard]] BASE_EXPORT std::u16string SysNSStringToUTF16(NSString* ref);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string SysNSStringToUTF8(NSString* ref);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string SysNSStringToUTF16(NSString* ref);
 
 #endif  // __OBJC__
 

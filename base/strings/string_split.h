@@ -45,12 +45,17 @@ enum SplitResult {
 //
 //   std::vector<std::string> tokens = base::SplitString(
 //       input, ",;", base::KEEP_WHITESPACE, base::SPLIT_WANT_ALL);
-[[nodiscard]] BASE_EXPORT std::vector<std::string> SplitString(
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::vector<std::string> SplitString(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::string> SplitString(
     StringPiece input,
     StringPiece separators,
     WhitespaceHandling whitespace,
     SplitResult result_type);
-[[nodiscard]] BASE_EXPORT std::vector<std::u16string> SplitString(
+// [[nodiscard]] BASE_EXPORT std::vector<std::u16string> SplitString(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::u16string> SplitString(
     StringPiece16 input,
     StringPiece16 separators,
     WhitespaceHandling whitespace,
@@ -70,12 +75,14 @@ enum SplitResult {
 //                               base::KEEP_WHITESPACE,
 //                               base::SPLIT_WANT_NONEMPTY)) {
 //     ...
-[[nodiscard]] BASE_EXPORT std::vector<StringPiece> SplitStringPiece(
+// [[nodiscard]] BASE_EXPORT std::vector<StringPiece> SplitStringPiece(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<StringPiece> SplitStringPiece(
     StringPiece input,
     StringPiece separators,
     WhitespaceHandling whitespace,
     SplitResult result_type);
-[[nodiscard]] BASE_EXPORT std::vector<StringPiece16> SplitStringPiece(
+// [[nodiscard]] BASE_EXPORT std::vector<StringPiece16> SplitStringPiece(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<StringPiece16> SplitStringPiece(
     StringPiece16 input,
     StringPiece16 separators,
     WhitespaceHandling whitespace,
@@ -102,12 +109,14 @@ BASE_EXPORT bool SplitStringIntoKeyValuePairsUsingSubstr(
 
 // Similar to SplitString, but use a substring delimiter instead of a list of
 // characters that are all possible delimiters.
-[[nodiscard]] BASE_EXPORT std::vector<std::u16string> SplitStringUsingSubstr(
+// [[nodiscard]] BASE_EXPORT std::vector<std::u16string> SplitStringUsingSubstr(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::u16string> SplitStringUsingSubstr(
     StringPiece16 input,
     StringPiece16 delimiter,
     WhitespaceHandling whitespace,
     SplitResult result_type);
-[[nodiscard]] BASE_EXPORT std::vector<std::string> SplitStringUsingSubstr(
+// [[nodiscard]] BASE_EXPORT std::vector<std::string> SplitStringUsingSubstr(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::string> SplitStringUsingSubstr(
     StringPiece input,
     StringPiece delimiter,
     WhitespaceHandling whitespace,
@@ -125,12 +134,14 @@ BASE_EXPORT bool SplitStringIntoKeyValuePairsUsingSubstr(
 //                                     base::KEEP_WHITESPACE,
 //                                     base::SPLIT_WANT_NONEMPTY)) {
 //     ...
-[[nodiscard]] BASE_EXPORT std::vector<StringPiece16>
+// [[nodiscard]] BASE_EXPORT std::vector<StringPiece16>
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<StringPiece16>
 SplitStringPieceUsingSubstr(StringPiece16 input,
                             StringPiece16 delimiter,
                             WhitespaceHandling whitespace,
                             SplitResult result_type);
-[[nodiscard]] BASE_EXPORT std::vector<StringPiece> SplitStringPieceUsingSubstr(
+// [[nodiscard]] BASE_EXPORT std::vector<StringPiece> SplitStringPieceUsingSubstr(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<StringPiece> SplitStringPieceUsingSubstr(
     StringPiece input,
     StringPiece delimiter,
     WhitespaceHandling whitespace,

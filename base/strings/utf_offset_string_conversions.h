@@ -96,7 +96,11 @@ BASE_EXPORT bool UTF8ToUTF16WithAdjustments(
     size_t src_len,
     std::u16string* output,
     base::OffsetAdjuster::Adjustments* adjustments);
-[[nodiscard]] BASE_EXPORT std::u16string UTF8ToUTF16WithAdjustments(
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::u16string UTF8ToUTF16WithAdjustments(
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string UTF8ToUTF16WithAdjustments(
     const base::StringPiece& utf8,
     base::OffsetAdjuster::Adjustments* adjustments);
 // As above, but instead internally examines the adjustments and applies them

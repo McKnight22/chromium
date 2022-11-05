@@ -68,8 +68,13 @@ using partition_alloc::win::kOomExceptionCode;
 // Note: You *must* use UncheckedFree() to free() the memory allocated, not
 // regular free(). This also means that this a pointer allocated below cannot be
 // passed to realloc().
-[[nodiscard]] BASE_EXPORT bool UncheckedMalloc(size_t size, void** result);
-[[nodiscard]] BASE_EXPORT bool UncheckedCalloc(size_t num_items,
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT bool UncheckedMalloc(size_t size, void** result);
+__attribute__((warn_unused_result)) BASE_EXPORT bool UncheckedMalloc(size_t size, void** result);
+// [[nodiscard]] BASE_EXPORT bool UncheckedCalloc(size_t num_items,
+__attribute__((warn_unused_result)) BASE_EXPORT bool UncheckedCalloc(size_t num_items,
                                                size_t size,
                                                void** result);
 

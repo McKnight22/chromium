@@ -176,7 +176,7 @@ ResultExpr BaselinePolicyAndroid::EvaluateSyscall(int sysno) const {
     // access. It may be possible to restrict the filesystem with SELinux.
     // Currently we rely on the app/service UID isolation to create a
     // filesystem "sandbox".
-#if !defined(ARCH_CPU_ARM64)
+#if !defined(ARCH_CPU_ARM64) && !defined(ARCH_CPU_RISCV64)
     case __NR_open:
 #endif
     case __NR_openat:

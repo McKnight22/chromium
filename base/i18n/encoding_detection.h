@@ -13,7 +13,11 @@ namespace base {
 
 // Detect encoding of |text| and put the name of encoding in |encoding|.
 // Returns true on success.
-[[nodiscard]] BASE_I18N_EXPORT bool DetectEncoding(const std::string& text,
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_I18N_EXPORT bool DetectEncoding(const std::string& text,
+__attribute__((warn_unused_result)) BASE_I18N_EXPORT bool DetectEncoding(const std::string& text,
                                                    std::string* encoding);
 }  // namespace base
 

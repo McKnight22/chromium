@@ -66,7 +66,10 @@ using blink::xpath::Step;
 
 #if defined(__clang__)
 // Clang warns that the variable 'yynerrs_' is set but not used.
-#pragma clang diagnostic ignored "-Wunused-but-set-variable"
+# FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+#        But -Wno-unused-but-set-variable is supported from clang version 13
+# Ref: https://reviews.freebsd.org/D31927
+//#pragma clang diagnostic ignored "-Wunused-but-set-variable"
 #endif
 #line 121 "third_party/blink/renderer/core/xml/xpath_grammar.y"
 

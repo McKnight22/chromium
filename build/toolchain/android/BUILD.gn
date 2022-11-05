@@ -143,3 +143,10 @@ android_clang_toolchain("android_clang_mips64el") {
     current_cpu = "mips64el"
   }
 }
+
+android_clang_toolchain("android_clang_riscv64") {
+  toolchain_args = {
+    current_cpu = "riscv64"
+    android64_ndk_api_level = 29
+  }
+}

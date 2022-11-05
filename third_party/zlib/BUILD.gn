@@ -268,7 +268,7 @@ source_set("zlib_slide_hash_simd") {
 config("zlib_warnings") {
   if (is_clang) {
     cflags = [
-      "-Wno-deprecated-non-prototype",
+      # "-Wno-deprecated-non-prototype",
       "-Wno-incompatible-pointer-types",
       "-Wunused-variable",
     ]
@@ -377,7 +377,7 @@ config("minizip_warnings") {
     cflags = [
       # zlib uses `if ((a == b))` for some reason.
       "-Wno-parentheses-equality",
-      "-Wno-deprecated-non-prototype",
+      # "-Wno-deprecated-non-prototype",
     ]
   }
 }
@@ -445,7 +445,7 @@ if (!is_win || target_os != "winuwp") {
       cflags = [
         "-Wno-incompatible-pointer-types-discards-qualifiers",
 
-        "-Wno-deprecated-non-prototype",
+        # "-Wno-deprecated-non-prototype",
       ]
     }
 
@@ -468,7 +468,7 @@ if (!is_win || target_os != "winuwp") {
     if (is_clang) {
       cflags = [
         "-Wno-incompatible-pointer-types-discards-qualifiers",
-        "-Wno-deprecated-non-prototype",
+        # "-Wno-deprecated-non-prototype",
       ]
     }
 

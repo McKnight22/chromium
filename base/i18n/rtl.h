@@ -153,7 +153,11 @@ BASE_I18N_EXPORT void WrapPathWithLTRFormatting(const FilePath& path,
 
 // Return the string in |text| wrapped with LRE (Left-To-Right Embedding) and
 // PDF (Pop Directional Formatting) marks, if needed for UI display purposes.
-[[nodiscard]] BASE_I18N_EXPORT std::u16string
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_I18N_EXPORT std::u16string
+__attribute__((warn_unused_result)) BASE_I18N_EXPORT std::u16string
 GetDisplayStringInLTRDirectionality(const std::u16string& text);
 
 // Strip the beginning (U+202A..U+202B, U+202D..U+202E) and/or ending (U+202C)
@@ -161,7 +165,8 @@ GetDisplayStringInLTRDirectionality(const std::u16string& text);
 // return the text itself. Explicit bidi control characters display and have
 // semantic effect. They can be deleted so they might not always appear in a
 // pair.
-[[nodiscard]] BASE_I18N_EXPORT std::u16string
+// [[nodiscard]] BASE_I18N_EXPORT std::u16string
+__attribute__((warn_unused_result)) BASE_I18N_EXPORT std::u16string
 StripWrappingBidiControlCharacters(const std::u16string& text);
 
 }  // namespace i18n

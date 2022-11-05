@@ -23,45 +23,58 @@ namespace base {
 // possible.
 BASE_EXPORT bool WideToUTF8(const wchar_t* src, size_t src_len,
                             std::string* output);
-[[nodiscard]] BASE_EXPORT std::string WideToUTF8(WStringPiece wide);
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::string WideToUTF8(WStringPiece wide);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string WideToUTF8(WStringPiece wide);
 BASE_EXPORT bool UTF8ToWide(const char* src, size_t src_len,
                             std::wstring* output);
-[[nodiscard]] BASE_EXPORT std::wstring UTF8ToWide(StringPiece utf8);
+// [[nodiscard]] BASE_EXPORT std::wstring UTF8ToWide(StringPiece utf8);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring UTF8ToWide(StringPiece utf8);
 
 BASE_EXPORT bool WideToUTF16(const wchar_t* src,
                              size_t src_len,
                              std::u16string* output);
-[[nodiscard]] BASE_EXPORT std::u16string WideToUTF16(WStringPiece wide);
+// [[nodiscard]] BASE_EXPORT std::u16string WideToUTF16(WStringPiece wide);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string WideToUTF16(WStringPiece wide);
 BASE_EXPORT bool UTF16ToWide(const char16_t* src,
                              size_t src_len,
                              std::wstring* output);
-[[nodiscard]] BASE_EXPORT std::wstring UTF16ToWide(StringPiece16 utf16);
+// [[nodiscard]] BASE_EXPORT std::wstring UTF16ToWide(StringPiece16 utf16);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring UTF16ToWide(StringPiece16 utf16);
 
 BASE_EXPORT bool UTF8ToUTF16(const char* src,
                              size_t src_len,
                              std::u16string* output);
-[[nodiscard]] BASE_EXPORT std::u16string UTF8ToUTF16(StringPiece utf8);
+// [[nodiscard]] BASE_EXPORT std::u16string UTF8ToUTF16(StringPiece utf8);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string UTF8ToUTF16(StringPiece utf8);
 BASE_EXPORT bool UTF16ToUTF8(const char16_t* src,
                              size_t src_len,
                              std::string* output);
-[[nodiscard]] BASE_EXPORT std::string UTF16ToUTF8(StringPiece16 utf16);
+// [[nodiscard]] BASE_EXPORT std::string UTF16ToUTF8(StringPiece16 utf16);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string UTF16ToUTF8(StringPiece16 utf16);
 
 // This converts an ASCII string, typically a hardcoded constant, to a UTF16
 // string.
-[[nodiscard]] BASE_EXPORT std::u16string ASCIIToUTF16(StringPiece ascii);
+// [[nodiscard]] BASE_EXPORT std::u16string ASCIIToUTF16(StringPiece ascii);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string ASCIIToUTF16(StringPiece ascii);
 
 // Converts to 7-bit ASCII by truncating. The result must be known to be ASCII
 // beforehand.
-[[nodiscard]] BASE_EXPORT std::string UTF16ToASCII(StringPiece16 utf16);
+// [[nodiscard]] BASE_EXPORT std::string UTF16ToASCII(StringPiece16 utf16);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string UTF16ToASCII(StringPiece16 utf16);
 
 #if defined(WCHAR_T_IS_UTF16)
 // This converts an ASCII string, typically a hardcoded constant, to a wide
 // string.
-[[nodiscard]] BASE_EXPORT std::wstring ASCIIToWide(StringPiece ascii);
+// [[nodiscard]] BASE_EXPORT std::wstring ASCIIToWide(StringPiece ascii);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring ASCIIToWide(StringPiece ascii);
 
 // Converts to 7-bit ASCII by truncating. The result must be known to be ASCII
 // beforehand.
-[[nodiscard]] BASE_EXPORT std::string WideToASCII(WStringPiece wide);
+// [[nodiscard]] BASE_EXPORT std::string WideToASCII(WStringPiece wide);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string WideToASCII(WStringPiece wide);
 #endif  // defined(WCHAR_T_IS_UTF16)
 
 // The conversion functions in this file should not be used to convert string

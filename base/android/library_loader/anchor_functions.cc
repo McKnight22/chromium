@@ -53,6 +53,18 @@ void dummy_function_start_of_ordered_text() {
   asm(".4byte 0x66dda6dc");
 }
 
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+
+void dummy_function_end_of_ordered_text() {
+  asm(".4byte 0x21bad44d");
+  asm(".4byte 0xb815c5b0");
+}
+
+void dummy_function_start_of_ordered_text() {
+  asm(".4byte 0xe4a07375");
+  asm(".4byte 0x66dda6dc");
+}
+
 #endif
 
 // These two symbols are defined by anchor_functions.lds and delimit the start

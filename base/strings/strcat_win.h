@@ -24,8 +24,13 @@ inline void StrAppend(std::wstring* dest,
   StrAppend(dest, make_span(pieces));
 }
 
-[[nodiscard]] BASE_EXPORT std::wstring StrCat(span<const WStringPiece> pieces);
-[[nodiscard]] BASE_EXPORT std::wstring StrCat(span<const std::wstring> pieces);
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::wstring StrCat(span<const WStringPiece> pieces);
+// [[nodiscard]] BASE_EXPORT std::wstring StrCat(span<const std::wstring> pieces);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring StrCat(span<const WStringPiece> pieces);
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring StrCat(span<const std::wstring> pieces);
 
 inline std::wstring StrCat(std::initializer_list<WStringPiece> pieces) {
   return StrCat(make_span(pieces));

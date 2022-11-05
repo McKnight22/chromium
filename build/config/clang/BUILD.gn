@@ -5,32 +5,34 @@
 import("clang.gni")
 
 config("find_bad_constructs") {
-  if (clang_use_chrome_plugins) {
-    cflags = []
+  # FIXME: Currently, Android RISCV64 only supports a clang older version 12.0.x.
+  #        So find-bad-constructs/-plugin-arg-find-bad-constructs/check-ipc are not supported yet?
+  # if (clang_use_chrome_plugins) {
+  #   cflags = []
 
-    # The plugin is built directly into clang, so there's no need to load it
-    # dynamically.
-    cflags += [
-      "-Xclang",
-      "-add-plugin",
-      "-Xclang",
-      "find-bad-constructs",
+  #   # The plugin is built directly into clang, so there's no need to load it
+  #   # dynamically.
+  #   cflags += [
+  #     "-Xclang",
+  #     "-add-plugin",
+  #     "-Xclang",
+  #     "find-bad-constructs",
 
-      "-Xclang",
-      "-plugin-arg-find-bad-constructs",
-      "-Xclang",
-      "raw-ref-template-as-trivial-member",
-    ]
+  #     "-Xclang",
+  #     "-plugin-arg-find-bad-constructs",
+  #     "-Xclang",
+  #     "raw-ref-template-as-trivial-member",
+  #   ]
 
-    if (is_linux || is_chromeos || is_android || is_fuchsia) {
-      cflags += [
-        "-Xclang",
-        "-plugin-arg-find-bad-constructs",
-        "-Xclang",
-        "check-ipc",
-      ]
-    }
-  }
+  #   if (is_linux || is_chromeos || is_android || is_fuchsia) {
+  #     cflags += [
+  #       "-Xclang",
+  #       "-plugin-arg-find-bad-constructs",
+  #       "-Xclang",
+  #       "check-ipc",
+  #     ]
+  #   }
+  # }
 }
 
 # Enables some extra Clang-specific warnings. Some third-party code won't

@@ -9,7 +9,10 @@ if (is_linux || is_chromeos) {
     if (is_clang) {
       cflags = [
         "-Wno-shadow",
-        "-Wno-unused-but-set-variable",
+        # FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+        #        But -Wno-unused-but-set-variable is supported from clang version 13
+        # Ref: https://reviews.freebsd.org/D31927
+        # "-Wno-unused-but-set-variable",
       ]
     }
   }

@@ -108,19 +108,19 @@ config("config") {
     # The plugin is built directly into clang, so there's no need to load it
     # dynamically.
     cflags += [
-      "-Xclang",
-      "-add-plugin",
-      "-Xclang",
-      "blink-gc-plugin",
+      # "-Xclang",
+      # "-add-plugin",
+      # "-Xclang",
+      # "blink-gc-plugin",
     ]
 
     # Add arguments for enabled GC plugin options:
     if (blink_gc_plugin_option_do_dump_graph) {
       cflags += [
-        "-Xclang",
-        "-plugin-arg-blink-gc-plugin",
-        "-Xclang",
-        "dump-graph",
+        # "-Xclang",
+        # "-plugin-arg-blink-gc-plugin",
+        # "-Xclang",
+        # "dump-graph",
       ]
     }
   }

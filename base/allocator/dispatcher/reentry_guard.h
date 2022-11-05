@@ -52,7 +52,11 @@ struct BASE_EXPORT ReentryGuard {
 
 // Use [[maybe_unused]] as this lightweight stand-in for the more heavyweight
 // ReentryGuard above will otherwise trigger the "unused code" warnings.
-struct [[maybe_unused]] BASE_EXPORT ReentryGuard {
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// struct [[maybe_unused]] BASE_EXPORT ReentryGuard {
+struct __attribute__((unused)) BASE_EXPORT ReentryGuard {
   constexpr explicit operator bool() const noexcept { return true; }
 
   static void InitTLSSlot();

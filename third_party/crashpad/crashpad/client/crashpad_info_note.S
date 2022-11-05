@@ -42,11 +42,11 @@ name:
 name_end:
   .balign NOTE_ALIGN
 desc:
-#if defined(__LP64__)
-  .quad CRASHPAD_INFO_SYMBOL - desc
-#else
-  .long CRASHPAD_INFO_SYMBOL - desc
-#endif  // __LP64__
+//#if defined(__LP64__)
+//  .quad CRASHPAD_INFO_SYMBOL - desc
+//#else
+//  .long CRASHPAD_INFO_SYMBOL - desc
+//#endif  // __LP64__
 desc_end:
   .size CRASHPAD_NOTE, .-CRASHPAD_NOTE
 

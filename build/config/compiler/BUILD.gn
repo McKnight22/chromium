@@ -1156,7 +1156,8 @@ config("compiler_cpu_abi") {
         ldflags += [ "-m64" ]
       }
     } else if (current_cpu == "riscv64") {
-      if (is_clang) {
+      if (is_clang && !is_android && !is_nacl && !is_fuchsia &&
+          !(is_chromeos_lacros && is_chromeos_device)) {
         cflags += [ "--target=riscv64-linux-gnu" ]
         ldflags += [ "--target=riscv64-linux-gnu" ]
       }
@@ -1245,7 +1246,14 @@ config("compiler_deterministic") {
     } else {
       # -ffile-compilation-dir is an alias for both -fdebug-compilation-dir=
       # and -fcoverage-compilation-dir=.
-      cflags += [ "-ffile-compilation-dir=." ]
+      # FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+      #        So -ffile-compilation-dir is not supported yet and using -fdebug-compilation-dir instead.
+      # Refs:
+      # https://reviews.llvm.org/D97433
+      # https://www.mail-archive.com/cfe-commits@lists.llvm.org/msg221553.html
+      # https://bugs.chromium.org/p/chromium/issues/detail?id=1231236
+      #cflags += [ "-ffile-compilation-dir=." ]
+      cflags += [ "-fdebug-compilation-dir=." ]
     }
     if (!is_win) {
       # We don't use clang -cc1as on Windows (yet? https://crbug.com/762167)
@@ -1489,6 +1497,7 @@ config("default_warnings") {
       # Disables.
       "-Wno-missing-field-initializers",  # "struct foo f = {0};"
       "-Wno-unused-parameter",  # Unused function parameters.
+      "-Wno-unused-function",
     ]
   }
 
@@ -1535,7 +1544,9 @@ config("default_warnings") {
       if (!is_nacl) {
         cflags += [
           # TODO(crbug.com/1343975) Evaluate and possibly enable.
-          "-Wno-deprecated-builtins",
+          # FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+          #        So -Wno-deprecated-builtins is not supported yet?
+          # "-Wno-deprecated-builtins",
         ]
       }
     }
@@ -1708,7 +1719,10 @@ config("no_chromium_code") {
     if (!is_nacl) {
       cflags += [
         # Disabled for similar reasons as -Wunused-variable.
-        "-Wno-unused-but-set-variable",
+        # FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+        #        But -Wno-unused-but-set-variable is supported from clang version 13
+        # Ref: https://reviews.freebsd.org/D31927
+        # "-Wno-unused-but-set-variable",
 
         # TODO(https://crbug.com/1202159): Clean up and enable.
         "-Wno-misleading-indentation",

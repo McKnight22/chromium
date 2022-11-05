@@ -58,11 +58,20 @@ namespace base {
 // for this call and generate slightly less code. This is something we can
 // explore more in the future.
 
-[[nodiscard]] BASE_EXPORT std::string StrCat(span<const StringPiece> pieces);
-[[nodiscard]] BASE_EXPORT std::u16string StrCat(
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::string StrCat(span<const StringPiece> pieces);
+// [[nodiscard]] BASE_EXPORT std::u16string StrCat(
+//    span<const StringPiece16> pieces);
+// [[nodiscard]] BASE_EXPORT std::string StrCat(span<const std::string> pieces);
+// [[nodiscard]] BASE_EXPORT std::u16string StrCat(
+//    span<const std::u16string> pieces);
+__attribute__((warn_unused_result)) BASE_EXPORT std::string StrCat(span<const StringPiece> pieces);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string StrCat(
     span<const StringPiece16> pieces);
-[[nodiscard]] BASE_EXPORT std::string StrCat(span<const std::string> pieces);
-[[nodiscard]] BASE_EXPORT std::u16string StrCat(
+__attribute__((warn_unused_result)) BASE_EXPORT std::string StrCat(span<const std::string> pieces);
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string StrCat(
     span<const std::u16string> pieces);
 
 // Initializer list forwards to the array version.

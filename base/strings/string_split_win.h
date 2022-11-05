@@ -16,25 +16,32 @@ namespace base {
 
 // The following section contains overloads of the cross-platform APIs for
 // std::wstring and base::WStringPiece.
-[[nodiscard]] BASE_EXPORT std::vector<std::wstring> SplitString(
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::vector<std::wstring> SplitString(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::wstring> SplitString(
     WStringPiece input,
     WStringPiece separators,
     WhitespaceHandling whitespace,
     SplitResult result_type);
 
-[[nodiscard]] BASE_EXPORT std::vector<WStringPiece> SplitStringPiece(
+// [[nodiscard]] BASE_EXPORT std::vector<WStringPiece> SplitStringPiece(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<WStringPiece> SplitStringPiece(
     WStringPiece input,
     WStringPiece separators,
     WhitespaceHandling whitespace,
     SplitResult result_type);
 
-[[nodiscard]] BASE_EXPORT std::vector<std::wstring> SplitStringUsingSubstr(
+// [[nodiscard]] BASE_EXPORT std::vector<std::wstring> SplitStringUsingSubstr(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<std::wstring> SplitStringUsingSubstr(
     WStringPiece input,
     WStringPiece delimiter,
     WhitespaceHandling whitespace,
     SplitResult result_type);
 
-[[nodiscard]] BASE_EXPORT std::vector<WStringPiece> SplitStringPieceUsingSubstr(
+// [[nodiscard]] BASE_EXPORT std::vector<WStringPiece> SplitStringPieceUsingSubstr(
+__attribute__((warn_unused_result)) BASE_EXPORT std::vector<WStringPiece> SplitStringPieceUsingSubstr(
     WStringPiece input,
     WStringPiece delimiter,
     WhitespaceHandling whitespace,

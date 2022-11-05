@@ -16,21 +16,28 @@
 namespace base {
 
 // Return a C++ string given printf-like input.
-[[nodiscard]] BASE_EXPORT std::string StringPrintf(const char* format, ...)
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[nodiscard]] BASE_EXPORT std::string StringPrintf(const char* format, ...)
+__attribute__((warn_unused_result)) BASE_EXPORT std::string StringPrintf(const char* format, ...)
     PRINTF_FORMAT(1, 2);
 #if BUILDFLAG(IS_WIN)
 // Note: Unfortunately compile time checking of the format string for UTF-16
 // strings is not supported by any compiler, thus these functions should be used
 // carefully and sparingly. Also applies to SStringPrintf and StringAppendV
 // below.
-[[nodiscard]] BASE_EXPORT std::wstring StringPrintf(const wchar_t* format, ...)
+// [[nodiscard]] BASE_EXPORT std::wstring StringPrintf(const wchar_t* format, ...)
+__attribute__((warn_unused_result)) BASE_EXPORT std::wstring StringPrintf(const wchar_t* format, ...)
     WPRINTF_FORMAT(1, 2);
-[[nodiscard]] BASE_EXPORT std::u16string StringPrintf(const char16_t* format,
+// [[nodiscard]] BASE_EXPORT std::u16string StringPrintf(const char16_t* format,
+__attribute__((warn_unused_result)) BASE_EXPORT std::u16string StringPrintf(const char16_t* format,
                                                       ...) WPRINTF_FORMAT(1, 2);
 #endif
 
 // Return a C++ string given vprintf-like input.
-[[nodiscard]] BASE_EXPORT std::string StringPrintV(const char* format,
+// [[nodiscard]] BASE_EXPORT std::string StringPrintV(const char* format,
+__attribute__((warn_unused_result)) BASE_EXPORT std::string StringPrintV(const char* format,
                                                    va_list ap)
     PRINTF_FORMAT(1, 0);
 

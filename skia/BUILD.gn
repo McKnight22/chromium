@@ -435,7 +435,7 @@ component("skia") {
   } else {
     sources += [
       "//third_party/skia/src/ports/SkOSFile_posix.cpp",
-      "//third_party/skia/src/ports/SkTLS_pthread.cpp",
+      #"//third_party/skia/src/ports/SkTLS_pthread.cpp",
     ]
   }
 
@@ -808,6 +808,8 @@ skia_source_set("skia_opts") {
   } else if (current_cpu == "ppc64") {
     sources = skia_opts.none_sources
   } else if (current_cpu == "s390x") {
+    sources = skia_opts.none_sources
+  } else if (current_cpu == "riscv64") {
     sources = skia_opts.none_sources
   } else {
     assert(false, "Need to port cpu specific stuff from skia_library_opts.gyp")

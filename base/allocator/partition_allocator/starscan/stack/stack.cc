@@ -116,7 +116,11 @@ namespace {
 // should never be inlined to ensure that a possible redzone cannot contain
 // any data that needs to be scanned.
 // No ASAN support as method accesses redzones while walking the stack.
-[[maybe_unused]] PA_NOINLINE PA_NO_SANITIZE("address") void IteratePointersImpl(
+// FIXME: Currently, Android RISCV64 only supports clang version 12.0.x.
+//        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// [[maybe_unused]] PA_NOINLINE PA_NO_SANITIZE("address") void IteratePointersImpl(
+__attribute__((unused)) PA_NOINLINE PA_NO_SANITIZE("address") void IteratePointersImpl(
     const Stack* stack,
     StackVisitor* visitor,
     uintptr_t* stack_ptr) {

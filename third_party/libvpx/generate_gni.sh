@@ -522,6 +522,12 @@ if [ -z $ONLY_CONFIGS ]; then
   make libvpx_srcs.txt target=libs $config > /dev/null
   convert_srcs_to_project_files libvpx_srcs.txt libvpx_srcs_ppc64
 
+  echo "Generate RISCV64 source list."
+  config=$(print_config linux/riscv64)
+  make_clean
+  make libvpx_srcs.txt target=libs $config > /dev/null
+  convert_srcs_to_project_files libvpx_srcs.txt libvpx_srcs_riscv64
+
 
   echo "Generate NaCl source list."
   config=$(print_config_basic nacl)

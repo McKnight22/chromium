@@ -905,7 +905,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 30 (current min is 23): `collectAndWriteAnrs`"
+        message="Call requires API level 30 (current min is 29): `collectAndWriteAnrs`"
         errorLine1="            List&lt;Pair&lt;File, String>> anrFiles = AnrCollector.collectAndWriteAnrs(anrDir);"
         errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1136,7 +1136,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 30 (current min is 23): `getExitReason`"
+        message="Call requires API level 30 (current min is 29): `getExitReason`"
         errorLine1="            int reason = ProcessExitReasonFromSystem.getExitReason(previousPid);"
         errorLine2="                                                     ~~~~~~~~~~~~~">
         <location
@@ -1653,7 +1653,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 30 (current min is 23): `getMaximumWindowMetricsBounds`"
+        message="Call requires API level 30 (current min is 29): `getMaximumWindowMetricsBounds`"
         errorLine1="        Rect rect = ApiHelperForR.getMaximumWindowMetricsBounds(windowManager);"
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1664,7 +1664,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 30 (current min is 23): `getDisplay`"
+        message="Call requires API level 30 (current min is 29): `getDisplay`"
         errorLine1="        updateCommon(size, displayMetrics.density, ApiHelperForR.getDisplay(mWindowContext));"
         errorLine2="                                                                 ~~~~~~~~~~">
         <location
@@ -1675,7 +1675,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 31 (current min is 26): `setAutoEnterEnabled`"
+        message="Call requires API level 31 (current min is 29): `setAutoEnterEnabled`"
         errorLine1="            ApiHelperForS.setAutoEnterEnabled(builder, true);"
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1686,7 +1686,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 31 (current min is 26): `setAutoEnterEnabled`"
+        message="Call requires API level 31 (current min is 29): `setAutoEnterEnabled`"
         errorLine1="            ApiHelperForS.setAutoEnterEnabled(builder, false);"
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1785,7 +1785,7 @@
 
     <issue
         id="NewApi"
-        message="Call requires API level 30 (current min is 23): `getExitReason`"
+        message="Call requires API level 30 (current min is 29): `getExitReason`"
         errorLine1="        recordAsEnumHistogram(umaName, getExitReason(pid));"
         errorLine2="                                       ~~~~~~~~~~~~~">
         <location
