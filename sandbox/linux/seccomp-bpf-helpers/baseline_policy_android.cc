@@ -93,6 +93,19 @@ ResultExpr RestrictAndroidIoctl(bool allow_userfaultfd_ioctls) {
   const int kAndroidAlarmGetTimeElapsedRealtime32 = 0x40086134;
   const int kAndroidAlarmGetTimeElapsedRealtime64 = 0x40106134;
 
+// FIXME: These marco defines should be from android_ndk's sysroot/usr/include/.
+//        But since Chromium official third_party/android_ndk is substituted with RISCV's special android_ndk,
+//        so these marco defines are placed here as a workaroud.
+#define BINDER_ENABLE_ONEWAY_SPAM_DETECTION _IOW('b', 16, __u32)
+#define _UFFDIO_CONTINUE (0x07)
+#define UFFDIO_CONTINUE _IOWR(UFFDIO, _UFFDIO_CONTINUE, struct uffdio_continue)
+struct uffdio_continue {
+  struct uffdio_range range;
+#define UFFDIO_CONTINUE_MODE_DONTWAKE ((__u64) 1 << 0)
+  __u64 mode;
+  __s64 mapped;
+};
+
   return Switch(request)
       .CASES((
                  // Android shared memory.
