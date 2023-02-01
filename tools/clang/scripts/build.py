@@ -35,6 +35,7 @@ from update import (CDS_URL, CHROMIUM_DIR, CLANG_REVISION, LLVM_BUILD_DIR,
 # Path constants. (All of these should be absolute paths.)
 THIRD_PARTY_DIR = os.path.join(CHROMIUM_DIR, 'third_party')
 LLVM_DIR = os.path.join(THIRD_PARTY_DIR, 'llvm')
+LLVM_PATCHES_DIR = os.path.join(THIRD_PARTY_DIR, 'llvm-patches')
 COMPILER_RT_DIR = os.path.join(LLVM_DIR, 'compiler-rt')
 LLVM_BOOTSTRAP_DIR = os.path.join(THIRD_PARTY_DIR, 'llvm-bootstrap')
 LLVM_BOOTSTRAP_INSTALL_DIR = os.path.join(THIRD_PARTY_DIR,
@@ -613,6 +614,14 @@ def main():
 
   if not args.skip_checkout:
     CheckoutLLVM(checkout_revision, LLVM_DIR)
+    # temp hack to apply patches
+    # DON'T submit
+    patch_1 = 'Enable-targeting-riscv64-linux-android.patch'
+    patch_cmd = [
+      'patch', '-d', LLVM_DIR, '-f', '-p1', '--no-backup-if-mismatch',
+	  '-i', LLVM_PATCHES_DIR + '/' + patch_1
+    ]
+    RunCommand(patch_cmd)
 
   if args.llvm_force_head_revision:
     CLANG_REVISION = GetCommitDescription(checkout_revision)
@@ -1063,13 +1072,15 @@ def main():
 
   if args.with_android:
     toolchain_dir = ANDROID_NDK_DIR + '/toolchains/llvm/prebuilt/linux-x86_64'
-    for target_arch in ['aarch64', 'arm', 'i686', 'x86_64']:
+    for target_arch in ['aarch64', 'arm', 'i686', 'x86_64', 'riscv64']:
       target_triple = target_arch
       if target_arch == 'arm':
         target_triple = 'armv7'
       api_level = '19'
       if target_arch == 'aarch64' or target_arch == 'x86_64':
         api_level = '21'
+      if target_arch == 'riscv64':
+        api_level = '29'
       target_triple += '-linux-android' + api_level
       cflags = [
           '--sysroot=%s/sysroot' % toolchain_dir,
