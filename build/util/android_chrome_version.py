@@ -127,6 +127,7 @@ _ARCH_TO_MFG_AND_BITNESS = {
     'arm64': ('arm', '64'),
     'x86': ('intel', '32'),
     'x64': ('intel', '64'),
+    'riscv64': ('riscv', '32'),
 }
 
 # Expose the available choices to other scripts.
@@ -184,6 +185,9 @@ _ABIS_TO_DIGIT_MASK = {
         '64_32': 7,
         '64': 8,
     },
+    'riscv': {
+         '32': 9
+    }
 }
 
 VersionCodeComponents = namedtuple('VersionCodeComponents', [
