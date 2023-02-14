@@ -943,6 +943,9 @@ public class LibraryLoader {
             case NativeLibraries.CPU_FAMILY_MIPS:
                 cpuAbi = is64Bit ? "mips64" : "mips";
                 break;
+            case NativeLibraries.CPU_FAMILY_RISCV:
+                cpuAbi = "riscv64"
+                break;
             default:
                 throw new RuntimeException("Unknown CPU ABI for native libraries");
         }

@@ -14,6 +14,7 @@ public class NativeLibraries {{
     public static final int CPU_FAMILY_ARM = 1;
     public static final int CPU_FAMILY_MIPS = 2;
     public static final int CPU_FAMILY_X86 = 3;
+    public static final int CPU_FAMILY_RISCV = 4;
 
     // Set to true to enable the use of the Chromium Linker.
     public static {MAYBE_FINAL}boolean sUseLinker{USE_LINKER};

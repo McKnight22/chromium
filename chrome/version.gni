@@ -49,7 +49,7 @@ if (is_mac) {
       "webview_beta_version_code = \"@WEBVIEW_BETA_VERSION_CODE@\" " +
       "webview_dev_version_code = \"@WEBVIEW_DEV_VERSION_CODE@\" "
 
-  if (target_cpu == "arm64" || target_cpu == "x64") {
+  if (target_cpu == "arm64" || target_cpu == "x64" || target_cpu == "riscv64") {
     _version_dictionary_template +=
         "monochrome_32_version_code = \"@MONOCHROME_32_VERSION_CODE@\" "
     _version_dictionary_template +=
@@ -181,7 +181,7 @@ if (is_mac) {
     "AndroidWebviewDev: $webview_dev_version_code",
   ]
 
-  if (target_cpu == "arm64" || target_cpu == "x64") {
+  if (target_cpu == "arm64" || target_cpu == "x64" || target_cpu == "riscv64") {
     lines_to_write += [
       "Monochrome32: $monochrome_32_version_code",
       "Monochrome3264: $monochrome_32_64_version_code",

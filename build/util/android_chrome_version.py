@@ -127,6 +127,7 @@ _ARCH_TO_MFG_AND_BITNESS = {
     'arm64': ('arm', '64'),
     'x86': ('intel', '32'),
     'x64': ('intel', '64'),
+    'riscv64': ('riscv', '64'),
 }
 
 # Expose the available choices to other scripts.
@@ -184,6 +185,14 @@ _ABIS_TO_DIGIT_MASK = {
         '64_32': 7,
         '64': 8,
     },
+# FIXME: just do the same as "intel"
+# Not sure the value if correct for chrome.
+    'riscv': {
+        '32': 2,
+        '32_64': 6,
+        '64_32': 7,
+        '64': 8,
+    }
 }
 
 VersionCodeComponents = namedtuple('VersionCodeComponents', [

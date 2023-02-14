@@ -43,7 +43,11 @@ if (is_android || is_chromeos) {
 
     # The default to use for android:minSdkVersion for targets that do
     # not explicitly set it.
-    default_min_sdk_version = 24
+    if (current_cpu == "riscv64") {
+      default_min_sdk_version = 29
+    } else {
+      default_min_sdk_version = 24
+    }
 
     # Static analysis can be either "on" or "off" or "build_server". This
     # controls how android lint, error-prone, bytecode checks are run. This
@@ -352,6 +356,8 @@ if (is_android || is_chromeos) {
     android_prebuilt_arch = "android-arm64"
   } else if (current_cpu == "mips64el") {
     android_prebuilt_arch = "android-mips64"
+  } else if (current_cpu == "riscv64") {
+    android_prebuilt_arch = "android-riscv64"
   } else {
     assert(false, "Need android libgcc support for your target arch.")
   }

@@ -69,11 +69,14 @@ if (current_cpu == "x86") {
 
   # Place holder for mips64 support, not tested.
   android_abi_target = "mips64el-linux-android"
+} else if (current_cpu == "riscv64") {
+  android_app_abi = "riscv64"
+  android_abi_target = "riscv64-linux-android"
 } else {
   assert(false, "Unknown Android ABI: " + current_cpu)
 }
 
-if (target_cpu == "arm64" || target_cpu == "x64" || target_cpu == "mips64el") {
+if (target_cpu == "arm64" || target_cpu == "x64" || target_cpu == "riscv64" || target_cpu == "mips64el") {
   android_64bit_target_cpu = true
 } else if (target_cpu == "arm" || target_cpu == "x86" ||
            target_cpu == "mipsel") {
@@ -93,6 +96,15 @@ if (target_cpu == "arm64") {
 } else if (target_cpu == "mips64el") {
   android_secondary_abi_cpu = "mipsel"
   android_app_secondary_abi = "mips"
+} else if (target_cpu == "riscv64") {
+  # FIXME: In origianl design, every 64-bit ARCH defaultly owns itself 32-bit
+  # second abi and will handle 2nd abi here and there.
+  # But for riscv64, we don't want to support riscv32. To not change too much,
+  # currently we just define pseudo 2nd abi here to pass gn build.
+  # A better solution maybe provided to support the case that there is no second
+  # abi, fix me later.
+  android_secondary_abi_cpu = "riscv32"
+  android_app_secondary_abi = "riscv32"
 }
 
 if (defined(android_secondary_abi_cpu)) {

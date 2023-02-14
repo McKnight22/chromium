@@ -118,9 +118,12 @@ public class DexFixer {
         String isaName;
         if (NativeLibraries.sCpuFamily == NativeLibraries.CPU_FAMILY_ARM) {
             isaName = is64Bit ? "arm64" : "arm";
-        } else {
+        } else if (NativeLibraries.sCpuFamily == NativeLibraries.CPU_FAMILY_RISCV) {
+            assert is64Bit == true;
+	    isaName = "riscv64"
+	} else {
             isaName = is64Bit ? "x86_64" : "x86";
-        }
+	}
         // E.g. /data/app/org.chromium.chrome-qtmmjyN79ucfPKm0ZVZMHg==/base.apk
         File apkFile = new File(apkPath);
         String baseName = apkFile.getName();
