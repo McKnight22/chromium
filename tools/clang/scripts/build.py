@@ -1076,11 +1076,16 @@ def main():
       target_triple = target_arch
       if target_arch == 'arm':
         target_triple = 'armv7'
-      api_level = '19'
+      # NOTICE: THIS CHANGE SHOULD BE DOUBLECHECK BEFORE SUBMIITED!!!
+      # For Chromium 109.0.5414.87, which uses android ndk r23, and it
+      # supports lowest API level 19 for arm32 & intel32.
+      # But when we are porting riscv64, we are using android ndk r26,
+      # and the lowest API level it supports is 21 for all ARCHs.
+      api_level = '21'
       if target_arch == 'aarch64' or target_arch == 'x86_64':
         api_level = '21'
       if target_arch == 'riscv64':
-        api_level = '29'
+        api_level = '10000'
       target_triple += '-linux-android' + api_level
       cflags = [
           '--sysroot=%s/sysroot' % toolchain_dir,
