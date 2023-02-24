@@ -65,6 +65,10 @@ source_set("libc++abi") {
     "_LIBCPP_CONSTINIT=constinit",
   ]
 
+  if (is_android && target_cpu == "riscv64") {
+    defines += ["HAVE___CXA_THREAD_ATEXIT_IMPL"]
+  }
+
   configs -= [
     "//build/config/compiler:chromium_code",
     "//build/config/compiler:no_exceptions",
