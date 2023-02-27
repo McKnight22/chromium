@@ -21,13 +21,14 @@ ninja:
 distclean:
 	rm -rf out/riscv64
 
+# FIXME: "clang_use_chrome_plugins=false" may not be required when we are using
+# clang for Chrome built by ourselves.
 gn:
 	gn gen out/riscv64 --args="\
 	target_os=\"android\" \
 	target_cpu=\"riscv64\" \
 	skip_secondary_abi_for_cq=true \
 	android_static_analysis=\"off\" \
-	clang_use_chrome_plugins=false \
 	clang_base_path=\"/aosp/common/wangchen/llvm-build/Release+Asserts\" \
 	clang_use_chrome_plugins=false \
 	default_min_sdk_version=10000"
