@@ -7,15 +7,21 @@
 # chrome_public_apk
 clean:
 	@echo Start cleaning target: "$(T)"
-	autoninja -v -C out/riscv64 -t clean $(T)
+	autoninja -C out/riscv64 -t clean $(T)
 	@echo Done!
 
-# make ninja T=<xxx>
 # build target and create log file
+# make ninja T=<xxx>
+# To get more verbose log:
+# make ninja T=<xxx> V=1
 ninja:
 	@echo Start building target: "$(T)"
 	-cp ./log ./log.bak
+ifeq ($(V),1)
 	autoninja -v -C out/riscv64 $(T) 2>&1 | tee ./log
+else
+	autoninja -C out/riscv64 $(T) 2>&1 | tee ./log
+endif
 	@echo Done!
 
 distclean:

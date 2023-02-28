@@ -438,6 +438,10 @@ config("compiler") {
     cflags += [ "-fPIC" ]
     ldflags += [ "-fPIC" ]
 
+    if (is_android && (target_cpu == "riscv64")) {
+      cflags += [ "-fno-emulated-tls" ]
+    }
+
     if (!is_clang) {
       # Use pipes for communicating between sub-processes. Faster.
       # (This flag doesn't do anything with Clang.)
