@@ -120,7 +120,7 @@ public class DexFixer {
             isaName = is64Bit ? "arm64" : "arm";
         } else if (NativeLibraries.sCpuFamily == NativeLibraries.CPU_FAMILY_RISCV) {
             assert is64Bit == true;
-	    isaName = "riscv64"
+	    isaName = "riscv64";
 	} else {
             isaName = is64Bit ? "x86_64" : "x86";
 	}
