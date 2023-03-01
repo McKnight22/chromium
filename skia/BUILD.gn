@@ -376,6 +376,21 @@ component("skia") {
     libs = [ "fontsub.lib" ]
   }
 
+  # FIXME: 
+  # third_party/skia/src/gpu/ganesh/GrAHardwareBufferUtils.cpp
+  # which will call APIs from EGL/GLESv2 when built for android
+  # and API level >= 26
+  # These libs should be required for all ARCHs when following
+  # conditions are met.
+  # I'm not sure if this is an existing bug because I see
+  # these libs are added in third_party/skia/BUILD.gn.
+  if (is_android && android64_ndk_api_level >= 26) {
+    libs = [
+      "EGL",
+      "GLESv2",
+    ]
+  }
+
   # need separate win section to handle chromes auto gn filter
   # (build/config/BUILDCONFIG.gn)
   if (is_win) {
