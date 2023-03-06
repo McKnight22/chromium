@@ -37,5 +37,5 @@ gn:
 	android_static_analysis=\"off\" \
 	clang_base_path=\"/aosp/common/wangchen/llvm-build/Release+Asserts\" \
 	clang_use_chrome_plugins=false \
-	default_min_sdk_version=29"
+	android64_ndk_api_level=29"
 
