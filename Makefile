@@ -15,6 +15,7 @@ T ?= chrome_public_apk
 # e.g.
 # - buildtools/third_party/libc++:libc++
 # - chrome_public_apk
+# - trichrome_webview_apk
 .PHONY: clean
 clean:
 	@echo Start cleaning target: "$(T)"
