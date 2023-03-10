@@ -348,6 +348,7 @@ group("gn_all") {
 
   if (is_android) {
     deps += [
+# FIXME(riscv64-android): mask out android_webview
 #      "//android_webview/js_sandbox/javatests:webview_js_sandbox_test_app",
       "//base:base_junit_tests",
       "//base/android/jni_generator:jni_generator_tests",
@@ -397,6 +398,7 @@ group("gn_all") {
 
     if (!is_cast_android) {
       deps += [
+# FIXME(riscv64-android): mask out android_webview
 #        "//android_webview:empty_group",
 #        "//android_webview/test",
 #        "//android_webview/tools/automated_ui_tests:webview_ui_test_app",
