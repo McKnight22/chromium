@@ -376,7 +376,7 @@ component("skia") {
     libs = [ "fontsub.lib" ]
   }
 
-  # FIXME: 
+  # FIXME(riscv64-android):
   # third_party/skia/src/gpu/ganesh/GrAHardwareBufferUtils.cpp
   # which will call APIs from EGL/GLESv2 when built for android
   # and API level >= 26

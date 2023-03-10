@@ -150,7 +150,7 @@ android_clang_toolchain("android_clang_riscv64") {
   }
 }
 
-# FIXME: define pseudo toolchain for 2nd abi here, just to pass gn build.
+# FIXME(riscv64-android): define pseudo toolchain for 2nd abi here, just to pass gn build.
 # Details refer to comments in build/config/android/abi.gni about 2nd abi
 # handling.
 android_clang_toolchain("android_clang_riscv32") {

@@ -97,7 +97,7 @@ if (target_cpu == "arm64") {
   android_secondary_abi_cpu = "mipsel"
   android_app_secondary_abi = "mips"
 } else if (target_cpu == "riscv64") {
-  # FIXME: In origianl design, every 64-bit ARCH defaultly owns itself 32-bit
+  # FIXME(riscv64-android): In origianl design, every 64-bit ARCH defaultly owns itself 32-bit
   # second abi and will handle 2nd abi here and there.
   # But for riscv64, we don't want to support riscv32. To not change too much,
   # currently we just define pseudo 2nd abi here to pass gn build.

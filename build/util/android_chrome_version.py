@@ -185,7 +185,7 @@ _ABIS_TO_DIGIT_MASK = {
         '64_32': 7,
         '64': 8,
     },
-# FIXME: just do the same as "intel"
+# FIXME(riscv64-android): just do the same as "intel"
 # Not sure the value if correct for chrome.
     'riscv': {
         '32': 2,
