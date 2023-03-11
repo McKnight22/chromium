@@ -615,13 +615,17 @@ def main():
   if not args.skip_checkout:
     CheckoutLLVM(checkout_revision, LLVM_DIR)
     # temp hack to apply patches
-    # DON'T submit
-    patch_1 = 'Enable-targeting-riscv64-linux-android.patch'
-    patch_cmd = [
-      'patch', '-d', LLVM_DIR, '-f', '-p1', '--no-backup-if-mismatch',
-	  '-i', LLVM_PATCHES_DIR + '/' + patch_1
+    # DON'T submit to google upstream
+    patches = [
+      'Enable-targeting-riscv64-linux-android.patch',
+      '0001-applied-patch-D145474.patch',
     ]
-    RunCommand(patch_cmd)
+    for _patch in patches:
+      patch_cmd = [
+        'patch', '-d', LLVM_DIR, '-f', '-p1', '--no-backup-if-mismatch',
+	  '-i', LLVM_PATCHES_DIR + '/' + _patch
+      ]
+      RunCommand(patch_cmd)
 
   if args.llvm_force_head_revision:
     CLANG_REVISION = GetCommitDescription(checkout_revision)
