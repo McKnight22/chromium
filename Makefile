@@ -53,5 +53,4 @@ gn:
 	skip_secondary_abi_for_cq=true \
 	android_static_analysis=\"off\" \
 	clang_base_path=\"$(CLANG)\" \
-	clang_use_chrome_plugins=false \
 	android64_ndk_api_level=29"
