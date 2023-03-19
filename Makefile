@@ -47,7 +47,5 @@ gn:
 	gn gen out/$(ARCH) --args="\
 	target_os=\"android\" \
 	target_cpu=\"$(ARCH)\" \
-	skip_secondary_abi_for_cq=true \
-	android_static_analysis=\"off\" \
 	clang_base_path=\"$(CLANG)\" \
 	android64_ndk_api_level=29"

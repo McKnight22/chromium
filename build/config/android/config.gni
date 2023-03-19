@@ -255,7 +255,7 @@ if (is_android || is_chromeos) {
     enable_arsc_obfuscation = true
 
     # The target to use as the system WebView implementation.
-    if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
+    if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
       system_webview_apk_target = "//android_webview:system_webview_64_apk"
     } else {
       system_webview_apk_target = "//android_webview:system_webview_apk"

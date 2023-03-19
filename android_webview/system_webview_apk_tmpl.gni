@@ -120,8 +120,7 @@ template("system_webview_apk_or_module_tmpl") {
         "If trichrome library is used, static_library_provider must be set " +
             "so that a dep can be added on the library APK.")
 
-    _include_32_bit_webview = !defined(invoker.include_32_bit_webview) ||
-                              invoker.include_32_bit_webview
+    _include_32_bit_webview = invoker.include_32_bit_webview
     if (android_64bit_target_cpu) {
       _include_64_bit_webview = !defined(invoker.include_64_bit_webview) ||
                                 invoker.include_64_bit_webview
