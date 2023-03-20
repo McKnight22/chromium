@@ -186,6 +186,10 @@ uint64_t CPUContext::StackPointer() const {
       return arm->sp;
     case kCPUArchitectureARM64:
       return arm64->sp;
+    case kCPUArchitectureRISCV32:
+      return riscv32->regs[2];
+    case kCPUArchitectureRISCV64:
+      return riscv64->regs[2];
     default:
       NOTREACHED();
       return ~0ull;
