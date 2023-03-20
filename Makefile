@@ -55,4 +55,4 @@ gn:
 	target_cpu=\"$(ARCH)\" \
 	android_static_analysis=\"off\" \
 	clang_base_path=\"$(CLANG)\" \
-	android64_ndk_api_level=29"
+	"
