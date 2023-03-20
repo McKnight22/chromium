@@ -361,11 +361,11 @@ template <>
 bool ExceptionSnapshotLinux::ReadContext<ContextTraits32>(
     ProcessReaderLinux* reader,
     LinuxVMAddress context_address) {
-  context_.architecture = kCPUArchitectureRISCV;
-  context_.riscv = &context_union_.riscv;
+  context_.architecture = kCPUArchitectureRISCV32;
+  context_.riscv32 = &context_union_.riscv32;
 
   return internal::ReadContext<ContextTraits32>(
-      reader, context_address, context_.riscv);
+      reader, context_address, context_.riscv32);
 }
 
 template <>

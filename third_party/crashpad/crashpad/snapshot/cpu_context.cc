@@ -231,7 +231,7 @@ bool CPUContext::Is64Bit() const {
     case kCPUArchitectureX86:
     case kCPUArchitectureARM:
     case kCPUArchitectureMIPSEL:
-    case kCPUArchitectureRISCV:
+    case kCPUArchitectureRISCV32:
       return false;
     default:
       NOTREACHED();

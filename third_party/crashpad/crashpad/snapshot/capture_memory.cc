@@ -118,9 +118,9 @@ void CaptureMemory::PointedToByContext(const CPUContext& context,
     MaybeCaptureMemoryAround(delegate, context.mipsel->regs[i]);
   }
 #elif defined(ARCH_CPU_RISCV_FAMILY)
-  if (context.architecture == kCPUArchitectureRISCV) {
-    for (size_t i = 0; i < std::size(context.riscv->regs); ++i) {
-      MaybeCaptureMemoryAround(delegate, context.riscv->regs[i]);
+  if (context.architecture == kCPUArchitectureRISCV32) {
+    for (size_t i = 0; i < std::size(context.riscv32->regs); ++i) {
+      MaybeCaptureMemoryAround(delegate, context.riscv32->regs[i]);
     }
   } else {
     for (size_t i = 0; i < std::size(context.riscv64->regs); ++i) {

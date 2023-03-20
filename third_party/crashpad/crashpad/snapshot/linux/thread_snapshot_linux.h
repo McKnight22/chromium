@@ -75,7 +75,7 @@ class ThreadSnapshotLinux final : public ThreadSnapshot {
     CPUContextMIPS mipsel;
     CPUContextMIPS64 mips64;
 #elif defined(ARCH_CPU_RISCV_FAMILY)
-    CPUContextRISCV riscv;
+    CPUContextRISCV32 riscv32;
     CPUContextRISCV64 riscv64;
 #else
 #error Port.

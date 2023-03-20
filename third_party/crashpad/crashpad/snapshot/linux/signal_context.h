@@ -439,7 +439,7 @@ struct ContextTraits32 : public Traits32 {
   using MContext = MContext32;
   using SignalThreadContext = ThreadContext::t32_t;
   using SignalFloatContext = FloatContext::f32_t;
-  using CPUContext = CPUContextRISCV;
+  using CPUContext = CPUContextRISCV32;
 };
 
 struct ContextTraits64 : public Traits64 {

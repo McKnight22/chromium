@@ -46,7 +46,7 @@ enum CPUArchitecture {
   kCPUArchitectureMIPS64EL,
 
   //! \brief 32-bit RISCV.
-  kCPUArchitectureRISCV,
+  kCPUArchitectureRISCV32,
 
   //! \brief 64-bit RISCV.
   kCPUArchitectureRISCV64

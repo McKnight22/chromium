@@ -207,7 +207,7 @@ CPUArchitecture SystemSnapshotLinux::GetCPUArchitecture() const {
                                     : kCPUArchitectureMIPSEL;
 #elif defined(ARCH_CPU_RISCV_FAMILY)
   return process_reader_->Is64Bit() ? kCPUArchitectureRISCV64
-	                            : kCPUArchitectureRISCV;
+	                            : kCPUArchitectureRISCV32;
 #else
 #error port to your architecture
 #endif
