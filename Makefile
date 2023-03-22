@@ -42,9 +42,6 @@ distclean:
 	rm -rf out/$(ARCH)
 
 # make gn [ARCH=<xxx>] [CLANG=<xxx>]
-# FIXME(riscv64-android):
-# "clang_use_chrome_plugins=false" may not be required when we are using
-# clang for Chrome built by ourselves.
 .PHONY: gn
 gn:
 	gn gen out/$(ARCH) --args="\
