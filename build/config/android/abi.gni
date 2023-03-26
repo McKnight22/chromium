@@ -34,17 +34,12 @@ declare_args() {
   # Forces all APKs/bundles to be 64-bit only to improve build speed in the CQ
   # (no need to also build 32-bit library).
   skip_secondary_abi_for_cq = false
-
 }
 
 assert(!devtools_instrumentation_dumping || use_order_profiling,
        "devtools_instrumentation_dumping requires use_order_profiling")
 assert(!use_call_graph || use_order_profiling,
        "use_call_graph requires use_order_profiling")
-
-# For APKs/bundles to be 64-bit only, no second abi is required. So, just skip.
-# eg. Android RISCV supports riscv64 only.
-skip_secondary_abi = false
 
 if (current_cpu == "x86") {
   android_app_abi = "x86"
@@ -77,8 +72,6 @@ if (current_cpu == "x86") {
 } else if (current_cpu == "riscv64") {
   android_app_abi = "riscv64"
   android_abi_target = "riscv64-linux-android"
-  # Forces all RISCV APKs/bundles to be 64-bit only since Android RISCV supports riscv64 only.
-  skip_secondary_abi = true
 } else {
   assert(false, "Unknown Android ABI: " + current_cpu)
 }
@@ -103,6 +96,9 @@ if (target_cpu == "arm64") {
 } else if (target_cpu == "mips64el") {
   android_secondary_abi_cpu = "mipsel"
   android_app_secondary_abi = "mips"
+} else if (target_cpu == "riscv64") {
+  # Forces all RISCV APKs/bundles to be 64-bit only since Android RISCV supports riscv64 only.
+  skip_secondary_abi_for_cq = true
 }
 
 if (defined(android_secondary_abi_cpu)) {

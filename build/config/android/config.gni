@@ -56,7 +56,7 @@ if (is_android || is_chromeos) {
     # "build_server" ensures that fast_local_dev_server.py is running and
     #     offloads analysis tasks to it to be run after the build completes.
     #     This is the recommended setting for local development.
-    if (is_official_build) {
+    if (is_official_build || skip_secondary_abi_for_cq) {
       android_static_analysis = "off"
     } else {
       android_static_analysis = "on"
@@ -255,7 +255,7 @@ if (is_android || is_chromeos) {
     enable_arsc_obfuscation = true
 
     # The target to use as the system WebView implementation.
-    if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
+    if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
       system_webview_apk_target = "//android_webview:system_webview_64_apk"
     } else {
       system_webview_apk_target = "//android_webview:system_webview_apk"

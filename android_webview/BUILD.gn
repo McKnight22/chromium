@@ -24,7 +24,7 @@ import("//tools/resources/generate_resource_allowlist.gni")
 import("//tools/v8_context_snapshot/v8_context_snapshot.gni")
 import("//weblayer/variables.gni")
 
-if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
+if (android_64bit_target_cpu && skip_secondary_abi_for_cq && defined(android_secondary_abi_cpu)) {
   assert(current_toolchain != android_secondary_abi_toolchain)
 }
 
@@ -59,7 +59,7 @@ template("standalone_system_webview_apk_tmpl") {
 }
 
 # Standalone WebView APK.
-if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
+if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
   group("system_webview_apk") {
     deps = [ ":system_webview_64_apk" ]
   }
@@ -96,7 +96,7 @@ standalone_system_webview_apk_tmpl("system_webview_no_weblayer_apk") {
       [ "//third_party/androidx:androidx_recyclerview_recyclerview_java" ]
 }
 
-if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
+if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
   group("system_webview_bundle") {
     deps = [ ":system_webview_64_bundle" ]
   }
@@ -158,7 +158,7 @@ if (android_64bit_target_cpu) {
       include_32_bit_webview = false
     }
   }
-  if (!skip_secondary_abi_for_cq && !skip_secondary_abi) {
+  if (!skip_secondary_abi_for_cq) {
     # These targets builds a 32-bit only Webview on a 64-bit config, analogous
     # to what's built on a 32-bit config. This lets all Webviews build on a
     # single configuration.
@@ -198,7 +198,7 @@ template("trichrome_webview_tmpl") {
   }
 }
 
-if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
+if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
   group("trichrome_webview_apk") {
     deps = [ ":trichrome_webview_64_apk" ]
   }
@@ -237,7 +237,7 @@ if (android_64bit_target_cpu) {
 }
 
 if (enable_webview_bundles) {
-  if (android_64bit_target_cpu && (skip_secondary_abi_for_cq || skip_secondary_abi)) {
+  if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
     group("trichrome_webview_bundle") {
       deps = [ ":trichrome_webview_64_bundle" ]
     }
@@ -308,7 +308,7 @@ if (enable_webview_bundles) {
 }
 
 # Trichrome WebView APK for a 64-bit Chrome.
-  if (android_64bit_target_cpu && !skip_secondary_abi_for_cq && !skip_secondary_abi) {
+if (android_64bit_target_cpu && !skip_secondary_abi_for_cq) {
   template("trichrome_webview_64_32_tmpl") {
     system_webview_apk_or_module_tmpl(target_name) {
       forward_variables_from(invoker, "*")
@@ -447,7 +447,7 @@ if (defined(android_secondary_abi_toolchain)) {
     }
   }
 } else {
-  if (!skip_secondary_abi) {
+  if (!android_64bit_target_cpu) {
     # 32-bit WebView library used in 32-bit only builds of 64/32 targets.
     webview_alternate_library("monochrome_64") {
     }
@@ -969,7 +969,7 @@ android_assets("pak_file_assets") {
   disable_compression = true
 }
 
-if (android_64bit_target_cpu && !skip_secondary_abi_for_cq && !skip_secondary_abi) {
+if (android_64bit_target_cpu && !skip_secondary_abi_for_cq) {
   android_assets("v8_snapshot_secondary_abi_assets") {
     assert(android_64bit_target_cpu,
            "32-bit targets shouldn't have secondary abi")
@@ -1012,7 +1012,7 @@ android_assets("monochrome_webview_primary_abi_assets") {
   }
 }
 
-if (android_64bit_target_cpu && !skip_secondary_abi_for_cq && !skip_secondary_abi) {
+if (android_64bit_target_cpu && !skip_secondary_abi_for_cq) {
   android_assets("webview_secondary_abi_assets") {
     deps = [ ":v8_snapshot_secondary_abi_assets" ]
   }
@@ -1028,7 +1028,7 @@ android_assets("weblayer_webview_assets") {
     ":webview_primary_abi_assets",
     "//third_party/icu:icu_assets",
   ]
-  if (android_64bit_target_cpu && !skip_secondary_abi_for_cq && !skip_secondary_abi) {
+  if (android_64bit_target_cpu && !skip_secondary_abi_for_cq) {
     deps += [ ":webview_secondary_abi_assets" ]
   }
 }

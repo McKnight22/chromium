@@ -150,15 +150,6 @@ android_clang_toolchain("android_clang_riscv64") {
   }
 }
 
-# FIXME(riscv64-android): define pseudo toolchain for 2nd abi here, just to pass gn build.
-# Details refer to comments in build/config/android/abi.gni about 2nd abi
-# handling.
-android_clang_toolchain("android_clang_riscv32") {
-  toolchain_args = {
-    current_cpu = "riscv64"
-  }
-}
-
 # Toolchain for creating native libraries that can be used by
 # robolectric_binary targets. It does not emulate NDK APIs nor make available
 # NDK header files.
