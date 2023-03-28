@@ -24,7 +24,7 @@ import("//tools/resources/generate_resource_allowlist.gni")
 import("//tools/v8_context_snapshot/v8_context_snapshot.gni")
 import("//weblayer/variables.gni")
 
-if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
+if (android_64bit_target_cpu && defined(android_secondary_abi_toolchain) && skip_secondary_abi_for_cq) {
   assert(current_toolchain != android_secondary_abi_toolchain)
 }
 
@@ -431,19 +431,21 @@ template("webview_alternate_library") {
   }
 }
 
-if (defined(android_secondary_abi_toolchain)) {
-  # Note here that on a given system, the webview-only library needs the same
-  # library name as the browser library, since the system webview factory will
-  # differentiate only by ABI.
-  if (current_toolchain == android_secondary_abi_toolchain) {
-    # This target is the 32-bit WebView library that pairs with a 64-bit
-    # browser. It is suffixed with _64 because its name must match the 64-bit
-    # browser library.
-    webview_alternate_library("monochrome_64") {
-    }
-  } else {
-    # Inverse of above, for the original 32-bit case.
-    webview_alternate_library("monochrome") {
+if (android_64bit_target_cpu) {
+  if (defined(android_secondary_abi_toolchain)) {
+    # Note here that on a given system, the webview-only library needs the same
+    # library name as the browser library, since the system webview factory will
+    # differentiate only by ABI.
+    if (current_toolchain == android_secondary_abi_toolchain) {
+      # This target is the 32-bit WebView library that pairs with a 64-bit
+      # browser. It is suffixed with _64 because its name must match the 64-bit
+      # browser library.
+      webview_alternate_library("monochrome_64") {
+      }
+    } else {
+      # Inverse of above, for the original 32-bit case.
+      webview_alternate_library("monochrome") {
+      }
     }
   }
 } else {

@@ -42,12 +42,17 @@ distclean:
 	rm -rf out/$(ARCH)
 
 # make gn [ARCH=<xxx>] [CLANG=<xxx>]
+# FIXME(riscv64-android):
+# Before riscv64 introduced into Chromium, every 64-bit ARCH enables its own 32-bit support by default.
+# But for RISCV, Android announced only pure 64-bit would be supported.
+# So for riscv64, to skip the legacy check logic for its 32-bit ABI, skip_secondary_abi_for_cq is enabled by default.
+# Meanwhile, android_static_analysis="off" is mandatory to guarantee disable_android_lint is true to pass gn build.
+# For detailed analysis, please refer to https://github.com/aosp-riscv/chromium/issues/5#issuecomment-1486249579.
 .PHONY: gn
 gn:
 	gn gen out/$(ARCH) --args="\
 	target_os=\"android\" \
 	target_cpu=\"$(ARCH)\" \
-	skip_secondary_abi_for_cq=true \
 	android_static_analysis=\"off\" \
 	clang_base_path=\"$(CLANG)\" \
 	android64_ndk_api_level=29"

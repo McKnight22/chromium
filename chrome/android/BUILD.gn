@@ -42,7 +42,7 @@ import("java_sources.gni")
 import("static_initializers.gni")
 import("trichrome.gni")
 
-if (android_64bit_target_cpu && skip_secondary_abi_for_cq) {
+if (android_64bit_target_cpu && defined(android_secondary_abi_toolchain) && skip_secondary_abi_for_cq) {
   assert(current_toolchain != android_secondary_abi_toolchain)
 }
 
