@@ -185,13 +185,10 @@ _ABIS_TO_DIGIT_MASK = {
         '64_32': 7,
         '64': 8,
     },
-# FIXME(riscv64-android): just do the same as "intel"
+# FIXME(riscv64-android):
 # Not sure the value if correct for chrome.
     'riscv': {
-        '32': 2,
-        '32_64': 6,
-        '64_32': 7,
-        '64': 8,
+        '64': 2,
     }
 }
 
@@ -300,7 +297,7 @@ def GenerateVersionCodes(version_values, arch, is_next_build):
   version_codes = {}
 
   for apk, package, abis in _APKS[bitness]:
-    if abis == '64_high' and arch != 'arm64':
+    if (abis == '64_32_high' and arch != 'arm64') or (abis != '64' and arch == 'riscv64'):
       continue
     abi_part = _ABIS_TO_DIGIT_MASK[mfg][abis]
     package_part = _PACKAGE_NAMES[package]
