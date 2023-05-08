@@ -150,6 +150,12 @@ android_clang_toolchain("android_clang_mips64el") {
   }
 }
 
+android_clang_toolchain("android_clang_riscv64") {
+  toolchain_args = {
+    current_cpu = "riscv64"
+  }
+}
+
 # Toolchain for creating native libraries that can be used by
 # robolectric_binary targets. It does not emulate NDK APIs nor make available
 # NDK header files.
