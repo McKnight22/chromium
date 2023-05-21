@@ -101,6 +101,15 @@ if (target_cpu == "arm64") {
 } else if (target_cpu == "mips64el") {
   android_secondary_abi_cpu = "mipsel"
   android_app_secondary_abi = "mips"
+} else if (target_cpu == "riscv64") {
+  # FIXME(riscv64-android):
+  # Before riscv64 introduced into Chromium, every 64-bit ARCH enables its own 32-bit support by default.
+  # But for RISCV, Android announced only pure 64-bit would be supported.
+  # So for riscv64, to skip the legacy check logic for its 32-bit ABI, skip_secondary_abi_for_cq is enabled by default.
+  # Meanwhile, android_static_analysis="off" is mandatory to guarantee disable_android_lint is true to pass gn build.
+  # For detailed analysis, please refer to https://github.com/aosp-riscv/chromium/issues/5#issuecomment-1486249579.
+  # Forces all RISCV APKs/bundles to be 64-bit only since Android RISCV supports riscv64 only.
+  skip_secondary_abi_for_cq = true
 }
 
 if (defined(android_secondary_abi_cpu)) {
