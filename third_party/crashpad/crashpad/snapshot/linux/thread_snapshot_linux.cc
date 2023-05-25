@@ -190,6 +190,22 @@ bool ThreadSnapshotLinux::Initialize(
         thread.thread_info.float_context.f32,
         context_.mipsel);
   }
+#elif defined(ARCH_CPU_RISCV_FAMILY)
+  if (process_reader->Is64Bit()) {
+    context_.architecture = kCPUArchitectureRISCV64;
+    context_.riscv64 = &context_union_.riscv64;
+    InitializeCPUContextRISCV<ContextTraits64>(
+        thread.thread_info.thread_context.t64,
+        thread.thread_info.float_context.f64,
+        context_.riscv64);
+  } else {
+    context_.architecture = kCPUArchitectureRISCV32;
+    context_.riscv32 = &context_union_.riscv32;
+    InitializeCPUContextRISCV<ContextTraits32>(
+        thread.thread_info.thread_context.t32,
+        thread.thread_info.float_context.f32,
+        context_.riscv32);
+  }
 #else
 #error Port.
 #endif

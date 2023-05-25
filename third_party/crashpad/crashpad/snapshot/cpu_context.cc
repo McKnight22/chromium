@@ -186,6 +186,10 @@ uint64_t CPUContext::StackPointer() const {
       return arm->sp;
     case kCPUArchitectureARM64:
       return arm64->sp;
+    case kCPUArchitectureRISCV32:
+      return riscv32->regs[2];
+    case kCPUArchitectureRISCV64:
+      return riscv64->regs[2];
     default:
       NOTREACHED();
       return ~0ull;
@@ -226,10 +230,12 @@ bool CPUContext::Is64Bit() const {
     case kCPUArchitectureX86_64:
     case kCPUArchitectureARM64:
     case kCPUArchitectureMIPS64EL:
+    case kCPUArchitectureRISCV64:
       return true;
     case kCPUArchitectureX86:
     case kCPUArchitectureARM:
     case kCPUArchitectureMIPSEL:
+    case kCPUArchitectureRISCV32:
       return false;
     default:
       NOTREACHED();
